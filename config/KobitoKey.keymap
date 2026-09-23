@@ -73,7 +73,7 @@
 &kp Q                       &kp W                     &kp E                      &kp R                              &kp T      &kp Y      &kp U                              &kp I                      &kp O                     &kp P
 &tap_preferrd LCTRL A       &tap_preferrd LEFT_WIN S  &tap_preferrd RIGHT_ALT D  &tap_preferrd LSHFT F              &kp G      &kp H      &tap_preferrd LEFT_SHIFT J         &tap_preferrd RIGHT_ALT K  &tap_preferrd LEFT_WIN L  &tap_preferrd RCTRL MINUS
 &tap_preferrd LEFT_SHIFT Z  &kp X                     &kp C                      &tap_preferrd LA(LC(LG(LSHFT))) V  &kp B      &kp N      &tap_preferrd RA(RC(RG(RSHFT))) M  &kp COMMA                  &kp DOT                   &tap_preferrd LEFT_SHIFT SLASH
-&kp LSHFT                   &kp LALT                  &kp LANGUAGE_2             &lt 1 SPACE                        &mkp LCLK  &kp ENTER  &lt 2 ENTER                        &kp LANGUAGE_1             &mo 5                     &mt LALT SLASH
+&kp LSHFT                   &mo 5                     &mkp LCLK                  &lt 1 LANGUAGE_2                   &kp SPACE  &kp ENTER  &lt 2 LANGUAGE_1                   &kp TAB                    &mo 5                     &mt LALT SLASH
             >;
         };
 
@@ -83,7 +83,7 @@
 &kp EXCL   &kp AT                             &kp HASH                            &kp DOLLAR                           &kp PERCENT  &kp CARET      &kp AMPS                       &kp ASTRK                         &kp LPAR                       &kp RIGHT_PARENTHESIS
 &kp LCTRL  &tap_preferrd LEFT_GUI LANGUAGE_1  &tap_preferrd RIGHT_ALT LANGUAGE_1  &tap_preferrd LEFT_SHIFT LANGUAGE_2  &kp GRAVE    &kp LEFT       &tap_preferrd LEFT_SHIFT DOWN  &tap_preferrd RIGHT_ALT UP_ARROW  &tap_preferrd RIGHT_GUI RIGHT  &tap_preferrd LCTRL SEMI
 &kp TAB    &kp CAPSLOCK                       &trans                              &sk LA(LC(LG(LEFT_SHIFT)))           &kp TILDE    &kp EQUAL      &kp SINGLE_QUOTE               &kp LBKT                          &kp RBKT                       &kp BACKSLASH
-&trans     &trans                             &trans                              &trans                               &trans       &kp BACKSPACE  &lt 4 TAB                      &trans                            &trans                         &kp DELETE
+&trans     &trans                             &trans                              &trans                               &trans       &kp BACKSPACE  &lt 4 ENTER                    &trans                            &trans                         &kp DELETE
             >;
         };
 
