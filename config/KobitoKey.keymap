@@ -4,6 +4,8 @@
 #include <dt-bindings/zmk/keys.h>
 #include <dt-bindings/zmk/pointing.h>
 
+&caps_word { continue-list = <UNDERSCORE BACKSPACE DELETE MINUS>; };
+
 / {
     combos {
         compatible = "zmk,combos";
@@ -17,7 +19,7 @@
         combo_kana {
             timeout-ms = <50>;
             key-positions = <16 17>;
-            bindings = <&kp LANG1>;
+            bindings = <&caps_word>;
         };
 
         combo_esc {
@@ -31,6 +33,36 @@
             key-positions = <10 11>;
             bindings = <&kp TAB>;
         };
+
+        esc {
+            bindings = <&kp ESCAPE>;
+            key-positions = <27 26>;
+            timeout-ms = <50>;
+        };
+
+        backspace {
+            bindings = <&kp BACKSPACE>;
+            key-positions = <15 16>;
+        };
+
+        tab {
+            bindings = <&kp TAB>;
+            key-positions = <27 28>;
+        };
+    };
+
+    behaviors {
+        tap_preferrd: tap_preferrd {
+            compatible = "zmk,behavior-hold-tap";
+            label = "TAP_PREFERRD";
+            bindings = <&kp>, <&kp>;
+
+            #binding-cells = <2>;
+            tapping-term-ms = <180>;
+            quick-tap-ms = <180>;
+            require-prior-idle-ms = <125>;
+            flavor = "tap-preferred";
+        };
     };
 
     keymap {
@@ -38,40 +70,58 @@
 
         default_layer {
             bindings = <
-&kp Q      &kp W     &kp E     &kp R        &kp T      &kp Y     &kp U        &kp I      &kp O      &kp P
-&kp A      &kp S     &kp D     &kp F        &kp G      &kp H     &kp J        &kp K      &kp L      &kp SEMI
-&kp Z      &kp X     &kp C     &kp V        &kp B      &kp N     &kp M        &kp COMMA  &kp DOT    &kp APOS
-&kp LSHFT  &kp LALT  &kp LCMD  &lt 2 SPACE  &kp LCTRL  &kp BSPC  &lt 1 ENTER  &kp RSHFT  &kp RSHFT  &mt LALT SLASH
+&kp Q                       &kp W                     &kp E                      &kp R                              &kp T      &kp Y      &kp U                              &kp I                      &kp O                     &kp P
+&tap_preferrd LCTRL A       &tap_preferrd LEFT_WIN S  &tap_preferrd RIGHT_ALT D  &tap_preferrd LSHFT F              &kp G      &kp H      &tap_preferrd LEFT_SHIFT J         &tap_preferrd RIGHT_ALT K  &tap_preferrd LEFT_WIN L  &tap_preferrd RCTRL MINUS
+&tap_preferrd LEFT_SHIFT Z  &kp X                     &kp C                      &tap_preferrd LA(LC(LG(LSHFT))) V  &kp B      &kp N      &tap_preferrd RA(RC(RG(RSHFT))) M  &kp COMMA                  &kp DOT                   &tap_preferrd LEFT_SHIFT SLASH
+&kp LSHFT                   &kp LALT                  &kp LANGUAGE_2             &lt 1 SPACE                        &mkp LCLK  &kp ENTER  &lt 2 LANGUAGE_1                   &kp LANGUAGE_1             &mo 5                     &mt LALT SLASH
             >;
         };
 
-        layer1 {
-            label = "NUMBER";
+        marks {
+            label = "marks";
             bindings = <
-&kp N0     &kp N1  &kp N2  &kp N3     &trans  &kp MINUS  &trans     &kp UP    &trans     &trans
-&kp EQUAL  &kp N4  &kp N5  &kp N6     &trans  &kp PLUS   &kp LEFT   &kp DOWN  &kp RIGHT  &trans
-&trans     &kp N7  &kp N8  &kp N9     &trans  &kp ASTRK  &kp SLASH  &kp LBKT  &kp RBKT   &trans
-&trans     &trans  &trans  &kp LSHFT  &trans  &trans     &trans     &trans    &trans     &trans
+&kp EXCL   &kp AT                             &kp HASH                            &kp DOLLAR                           &kp PERCENT  &kp CARET      &kp AMPS                       &kp ASTRK                         &kp LPAR                       &kp RIGHT_PARENTHESIS
+&kp LCTRL  &tap_preferrd LEFT_GUI LANGUAGE_1  &tap_preferrd RIGHT_ALT LANGUAGE_1  &tap_preferrd LEFT_SHIFT LANGUAGE_2  &kp GRAVE    &kp LEFT       &tap_preferrd LEFT_SHIFT DOWN  &tap_preferrd RIGHT_ALT UP_ARROW  &tap_preferrd RIGHT_GUI RIGHT  &tap_preferrd LCTRL SEMI
+&kp TAB    &kp CAPSLOCK                       &trans                              &sk LA(LC(LG(LEFT_SHIFT)))           &kp TILDE    &kp EQUAL      &kp SINGLE_QUOTE               &kp LBKT                          &kp RBKT                       &kp BACKSLASH
+&trans     &trans                             &trans                              &trans                               &trans       &kp BACKSPACE  &lt 4 TAB                      &trans                            &trans                         &kp DELETE
             >;
         };
 
-        layer2 {
-            label = "FUNCTION";
+        numbers {
+            label = "numbers";
             bindings = <
-&bt BT_SEL 0  &bt BT_SEL 1  &bt BT_SEL 2  &bt BT_SEL 3  &bt BT_SEL 4    &kp F1   &kp F2   &kp F3  &kp F4  &kp F5
-&trans        &trans        &trans        &trans        &bt BT_CLR      &kp F6   &kp F7   &kp F8  &kp F9  &kp F10
-&trans        &trans        &trans        &trans        &bt BT_CLR_ALL  &kp F11  &kp F12  &trans  &trans  &trans
-&trans        &trans        &trans        &trans        &trans          &kp DEL  &trans   &trans  &trans  &trans
+&kp NUMBER_1  &kp NUMBER_2  &kp NUMBER_3  &kp NUMBER_4  &kp N5  &kp NUMBER_6  &kp N7           &kp N8         &kp N9         &kp N0
+&sk LCTRL     &sk LEFT_WIN  &sk RALT      &sk LSHFT     &trans  &trans        &sk RIGHT_SHIFT  &sk RIGHT_ALT  &sk RIGHT_GUI  &sk RCTRL
+&trans        &trans        &trans        &trans        &trans  &trans        &trans           &trans         &trans         &trans
+&trans        &trans        &trans        &lt 4 N0      &trans  &trans        &trans           &trans         &trans         &trans
             >;
         };
 
         layer3 {
             label = "MOUSE";
             bindings = <
-&trans     &trans  &trans    &trans    &trans  &trans  &mkp MB1  &mkp MB3  &mkp MB2  &trans
-&trans     &trans  &trans    &trans    &trans  &trans  &trans    &trans    &trans    &trans
-&trans     &trans  &trans    &trans    &trans  &trans  &trans    &trans    &trans    &trans
-&kp LSHFT  &trans  &kp LCMD  &kp LALT  &to 0   &trans  &trans    &trans    &to 0     &kp RALT
+&trans  &trans  &trans  &trans  &trans  &trans  &mkp MB1  &mkp MB3  &mkp MB2  &trans
+&trans  &trans  &trans  &trans  &trans  &trans  &trans    &trans    &trans    &trans
+&trans  &trans  &trans  &trans  &trans  &trans  &trans    &trans    &trans    &trans
+&trans  &trans  &trans  &trans  &trans  &trans  &trans    &trans    &trans    &trans
+            >;
+        };
+
+        ext {
+            bindings = <
+&kp F1     &kp F2    &kp F3    &kp F4     &kp F5  &kp F6    &kp F7         &kp F8     &kp F9   &kp F10
+&sk LCTRL  &sk RGUI  &sk RALT  &sk RSHFT  &trans  &kp HOME  &kp PAGE_DOWN  &kp PG_UP  &kp END  &kp LS(LG(NUMBER_4))
+&kp CAPS   &trans    &trans    &trans     &trans  &trans    &kp F11        &kp F12    &trans   &trans
+&trans     &trans    &trans    &trans     &trans  &trans    &trans         &trans     &trans   &trans
+            >;
+        };
+
+        bluetooth {
+            bindings = <
+&trans        &trans        &trans        &trans        &bt BT_CLR_ALL  &trans      &trans  &trans  &trans  &trans
+&bt BT_SEL 0  &bt BT_SEL 1  &bt BT_SEL 2  &bt BT_SEL 3  &bt BT_SEL 4    &trans      &trans  &trans  &trans  &trans
+&trans        &trans        &trans        &trans        &trans          &trans      &trans  &trans  &trans  &trans
+&trans        &trans        &bt BT_PRV    &bt BT_NXT    &trans          &bt BT_CLR  &trans  &trans  &trans  &trans
             >;
         };
     };
