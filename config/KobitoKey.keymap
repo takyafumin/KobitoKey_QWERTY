@@ -6,10 +6,6 @@
 
 &caps_word { continue-list = <UNDERSCORE BACKSPACE DELETE MINUS>; };
 
-&mwh {
-    input-processors = <&inverter>;
-};
-
 / {
     combos {
         compatible = "zmk,combos";
