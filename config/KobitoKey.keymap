@@ -6,6 +6,10 @@
 
 &caps_word { continue-list = <UNDERSCORE BACKSPACE DELETE MINUS>; };
 
+&mwh {
+    input-processors = <&inverter>;
+};
+
 / {
     combos {
         compatible = "zmk,combos";
@@ -15,114 +19,3 @@
             key-positions = <12 13>;
             bindings = <&kp LANG2>;
         };
-
-        combo_kana {
-            timeout-ms = <50>;
-            key-positions = <16 17>;
-            bindings = <&caps_word>;
-        };
-
-        combo_esc {
-            timeout-ms = <50>;
-            key-positions = <0 1>;
-            bindings = <&kp ESC>;
-        };
-
-        combo_tab {
-            timeout-ms = <50>;
-            key-positions = <10 11>;
-            bindings = <&kp TAB>;
-        };
-
-        esc {
-            bindings = <&kp ESCAPE>;
-            key-positions = <27 26>;
-            timeout-ms = <50>;
-        };
-
-        backspace {
-            bindings = <&kp BACKSPACE>;
-            key-positions = <15 16>;
-        };
-
-        tab {
-            bindings = <&kp TAB>;
-            key-positions = <27 28>;
-        };
-    };
-
-    behaviors {
-        tap_preferrd: tap_preferrd {
-            compatible = "zmk,behavior-hold-tap";
-            label = "TAP_PREFERRD";
-            bindings = <&kp>, <&kp>;
-
-            #binding-cells = <2>;
-            tapping-term-ms = <180>;
-            quick-tap-ms = <180>;
-            require-prior-idle-ms = <125>;
-            flavor = "tap-preferred";
-        };
-    };
-
-    keymap {
-        compatible = "zmk,keymap";
-
-        default_layer {
-            bindings = <
-&kp Q                       &kp W                     &kp E                      &kp R                              &kp T      &kp Y      &kp U                              &kp I                      &kp O                     &kp P
-&tap_preferrd LCTRL A       &tap_preferrd LEFT_WIN S  &tap_preferrd RIGHT_ALT D  &tap_preferrd LSHFT F              &kp G      &kp H      &tap_preferrd LEFT_SHIFT J         &tap_preferrd RIGHT_ALT K  &tap_preferrd LEFT_WIN L  &tap_preferrd RCTRL MINUS
-&tap_preferrd LEFT_SHIFT Z  &kp X                     &kp C                      &tap_preferrd LA(LC(LG(LSHFT))) V  &kp B      &kp N      &tap_preferrd RA(RC(RG(RSHFT))) M  &kp COMMA                  &kp DOT                   &tap_preferrd LEFT_SHIFT SLASH
-&kp LSHFT                   &mo 5                     &mkp LCLK                  &lt 1 LANGUAGE_2                   &kp SPACE  &kp ENTER  &lt 2 LANGUAGE_1                   &kp TAB                    &mo 5                     &mt LALT SLASH
-            >;
-        };
-
-        marks {
-            label = "marks";
-            bindings = <
-&kp EXCL   &kp AT                             &kp HASH                            &kp DOLLAR                           &kp PERCENT  &kp CARET      &kp AMPS                       &kp ASTRK                         &kp LPAR                       &kp RIGHT_PARENTHESIS
-&kp LCTRL  &tap_preferrd LEFT_GUI LANGUAGE_1  &tap_preferrd RIGHT_ALT LANGUAGE_1  &tap_preferrd LEFT_SHIFT LANGUAGE_2  &kp GRAVE    &kp LEFT       &tap_preferrd LEFT_SHIFT DOWN  &tap_preferrd RIGHT_ALT UP_ARROW  &tap_preferrd RIGHT_GUI RIGHT  &tap_preferrd LCTRL SEMI
-&kp TAB    &kp CAPSLOCK                       &trans                              &sk LA(LC(LG(LEFT_SHIFT)))           &kp TILDE    &kp EQUAL      &kp SINGLE_QUOTE               &kp LBKT                          &kp RBKT                       &kp BACKSLASH
-&trans     &trans                             &trans                              &trans                               &trans       &kp BACKSPACE  &lt 4 ENTER                    &trans                            &trans                         &kp DELETE
-            >;
-        };
-
-        numbers {
-            label = "numbers";
-            bindings = <
-&kp NUMBER_1  &kp NUMBER_2  &kp NUMBER_3  &kp NUMBER_4  &kp N5  &kp NUMBER_6  &kp N7                                &kp N8         &kp N9         &kp N0
-&sk LCTRL     &sk LEFT_WIN  &sk RALT      &sk LSHFT     &trans  &trans        &tap_preferrd RIGHT_SHIFT LANGUAGE_1  &sk RIGHT_ALT  &sk RIGHT_GUI  &sk RCTRL
-&trans        &trans        &trans        &trans        &trans  &trans        &trans                                &trans         &trans         &trans
-&trans        &trans        &trans        &lt 4 N0      &trans  &trans        &trans                                &trans         &trans         &trans
-            >;
-        };
-
-        layer3 {
-            label = "MOUSE";
-            bindings = <
-&trans  &trans  &trans  &trans  &trans  &trans  &mkp MB1  &mkp MB3  &mkp MB2  &trans
-&trans  &trans  &trans  &trans  &trans  &trans  &trans    &trans    &trans    &trans
-&trans  &trans  &trans  &trans  &trans  &trans  &trans    &trans    &trans    &trans
-&trans  &trans  &trans  &trans  &trans  &trans  &trans    &trans    &trans    &trans
-            >;
-        };
-
-        ext {
-            bindings = <
-&kp F1     &kp F2    &kp F3    &kp F4     &kp F5  &kp F6    &kp F7         &kp F8     &kp F9   &kp F10
-&sk LCTRL  &sk RGUI  &sk RALT  &sk RSHFT  &trans  &kp HOME  &kp PAGE_DOWN  &kp PG_UP  &kp END  &kp LS(LG(NUMBER_4))
-&kp CAPS   &trans    &trans    &trans     &trans  &trans    &kp F11        &kp F12    &trans   &trans
-&trans     &trans    &trans    &trans     &trans  &trans    &trans         &trans     &trans   &trans
-            >;
-        };
-
-        bluetooth {
-            bindings = <
-&trans        &trans        &trans        &trans        &bt BT_CLR_ALL  &trans      &trans  &trans  &trans  &trans
-&bt BT_SEL 0  &bt BT_SEL 1  &bt BT_SEL 2  &bt BT_SEL 3  &bt BT_SEL 4    &trans      &trans  &trans  &trans  &trans
-&trans        &trans        &trans        &trans        &trans          &trans      &trans  &trans  &trans  &trans
-&trans        &trans        &bt BT_PRV    &bt BT_NXT    &trans          &bt BT_CLR  &trans  &trans  &trans  &trans
-            >;
-        };
-    };
-};
